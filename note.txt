@@ -1,0 +1,19 @@
+Static Web Server and Dynamic Web Server
+- Dynamic Web Server:
+Tương tác với db (Phức tạp hoặc đơn giản)
+Client yêu cầu trả về file 
+Nhận tham số đầu vào từ client và trả về 1 logic nào đấy 
+
+-Single Page Application (SPA) 
+Content rendered in the FE
+No page reloading
+Interact with data via json api 
+
+Nếu 1 app nhỏ mà ko cần đòi hỏi trải nghiệm người dùng tốt thì có thể dùng multiple page
+Tuy nhiên nếu phía FE phức tạp thì nên sử dụng SPA 
+
+Query Parameters
+Vidu: https://www.google.com.vn/search?q=hello&sca... 
+Sau ? la 1 query và sau & là value
+Trả về 1 cặp key:value
+
