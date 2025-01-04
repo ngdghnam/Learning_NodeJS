@@ -1,6 +1,15 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const bodyParser = require("body-parser");
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
+const adapter = new FileSync("db.json");
+const db = low(adapter);
+const shortid = require("shortid");
+
+// Set some defaults
+db.defaults({ users: [] }).write();
 
 var users = [
   { id: 1, name: "Nam" },
@@ -10,6 +19,8 @@ var users = [
 
 app.set("view engine", "pug");
 app.set("views", "./views");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   //   res.send("<h1>Hello World!</h1> <a href='/about-us'>About me</a>");
@@ -19,23 +30,48 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/about-us", (req, res) => {
+app.get("/users", (req, res) => {
   res.render("users/index", {
-    users: users,
+    users: db.get("users").value(),
   });
 });
 
-app.get("/about-us/search", (req, res) => {
+app.get("/users/search", (req, res) => {
   var q = req.query.q;
-  var matchedUsers = users.filter((user) => {
-    return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-  });
+  var matchedUsers = db
+    .get("users")
+    .filter((user) => {
+      return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    })
+    .value();
   //console.log(req.matchedUsers);
 
   res.render("users/index", {
     users: matchedUsers,
     query: q,
   });
+});
+
+app.get("/users/create", (req, res) => {
+  res.render("users/create");
+});
+
+app.get("/users/:id", (req, res) => {
+  // var id = parseInt(req.params.id);
+  // route parameter
+  var id = req.params.id;
+  var user = db.get("users").find({ id: id }).value();
+  res.render("users/view", {
+    user: user,
+  });
+});
+
+app.post("/users/create", (req, res) => {
+  // console.log(req.body);
+  // users.push(req.body);
+  req.body.id = shortid.generate();
+  db.get("users").push(req.body).write();
+  res.redirect("/users");
 });
 
 app.listen(port, () => {
