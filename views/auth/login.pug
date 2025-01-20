@@ -1,0 +1,33 @@
+extends ../layouts/common
+
+block content
+
+  if errors 
+    each error in errors
+      .alert.alert-danger(role="alert")
+        = error
+
+  nav.navbar.bg-body-tertiary
+    h1.p-2.navbar-brand.title Login
+
+    .container-fluid.align-items-center 
+      form.d-flex.align-items-center.gap-3(
+        method="POST",
+      )
+        label.ps-1(for="email") Email
+        input#email.form-control.me-2(
+          type="email",
+          name="email",
+          placeholder="Email",
+          value= values ? values.email : ""
+        )
+
+        label.ps-1(for="password") Password
+        input#password.form-control.me-2(
+          type="password",
+          name="password",
+          placeholder="Password",
+          value= values ? values.password : ""
+        )
+
+        button.btn.btn-outline-primary(type="submit") Login 

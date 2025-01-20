@@ -1,15 +1,30 @@
-h1 Users
+extends ../layouts/common.pug
 
-a(href='/users/create') Create User
+block content
+  h1.mx-2 Users
 
-form(action='/users/search' method='GET') 
-    input(type='text', name='q', value=query)
-    button Search User
+  a.btn.btn-outline-primary.my-2.mx-2(href="/users/create") Create User
 
-ul 
-    each user in users
-        li
-            span= user.name
-            span &nbsp;
-            a(href='/users/' + user.id) View
-        
+  form.mx-2.d-flex.gap-3(action="/users/search", method="GET") 
+    input(type="text", name="q", value=query)
+    button.btn.btn-outline-dark Search User
+
+  .container-fluid
+    table.table.table-striped
+      thead
+        tr  
+            th Avatar
+            th Name
+            th Phone
+            th Action
+      tbody
+        each user in users
+          tr
+            td
+              img.avatar(src=user.avatar, width="50px")
+            td
+              span= user.name
+            td 
+                span= user.phone
+            td
+              a.btn(href="/users/") View

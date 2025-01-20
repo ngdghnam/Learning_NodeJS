@@ -1,10 +1,44 @@
-h1 Create users 
+extends ../layouts/common
 
-form(action="/users/create",method="POST")
-    label Name 
-    input(type="text", name="name")
+block content
 
-    //- label Phone
-    //- input(type="text", name="phone")
+  if errors 
+    each error in errors
+      .alert.alert-danger(role="alert")
+        = error
 
-    button Create 
+  nav.navbar.bg-body-tertiary
+    h1.p-2.navbar-brand.title Create users
+
+    .container-fluid.align-items-center 
+      form.d-flex.gap-3.flex-column(
+        action="/users/create",
+        method="POST",
+        enctype="multipart/form-data"
+      )
+        .form-group
+          label.ps-1(for="name") Name
+          input#name.form-control.me-2(
+            type="text",
+            name="name",
+            placeholder="Name",
+            value= values ? values.name : ""
+          )
+        
+        .form-group
+          label.ps-1(for="phone") Phone
+          input#phone.form-control.me-2(
+            type="text",
+            name="phone",
+            placeholder="Phone",
+            value= values ? values.phone : ""
+          )
+
+        .form-group
+          label.ps-1.me-1(for="avatar") Avatar
+          input#avatar.form-control-file.me-2(
+            type="file",
+            name="avatar",
+          )
+
+        button.btn.btn-outline-success(type="submit") Create

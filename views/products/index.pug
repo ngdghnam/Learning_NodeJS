@@ -1,0 +1,14 @@
+extends ../layouts/common
+
+block content
+    h1.text-primary.mb-4 View Products
+
+    div.container-fluid
+        div.row.gap-3
+            each product in products
+                div.card(style="width: 18rem;")
+                    img.card-img-top(src=product.thumbail, alt=product.first_name)
+                    div.card-body
+                        h5.card-title= product.first_name
+                        p.card-text= product.last_name
+                        a.btn.btn-outline-primary(href="/cart/add/" + product.id) Add to Cart
