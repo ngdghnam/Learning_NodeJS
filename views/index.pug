@@ -1,0 +1,10 @@
+extends ../views/layouts/common.pug
+
+block content
+  .mx-2
+    h1 Hello World! My name is #{ name }
+    img.img-fluid(src="/images/song2.jpg", alt="song2.jpg", style="border-radius: 8px;")
+    p(class="") I'm #{ age } years old
+    p My major is #{ major }
+    p I'm a Senior at #{ school }
+    a.btn.btn-outline-dark(href="/users") About us

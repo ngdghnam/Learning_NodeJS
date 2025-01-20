@@ -1,0 +1,31 @@
+{
+  "name": "learn_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "bootstrap": "^5.3.3",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "lowdb": "^1.0.0",
+    "md5": "^2.3.0",
+    "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1",
+    "pug": "^3.0.3",
+    "shortid": "^2.2.8"
+  },
+  "devDependencies": {
+    "@prettier/plugin-pug": "^3.2.0",
+    "cookie-parser": "^1.4.7",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2"
+  }
+}

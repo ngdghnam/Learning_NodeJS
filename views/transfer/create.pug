@@ -1,0 +1,23 @@
+extends ../layouts/common
+
+block content
+    h1 New Transfer 
+
+    .container-fluid.align-items-center 
+      form.d-flex.align-items-center.gap-3(
+        method="POST"
+      )
+        input(type="hidden", name="_csrf", value=csrfToken)
+        label.ps-1(for="account") Account
+        input#account.form-control.me-2(
+          type="text",
+          name="accountId",
+        )
+
+        label.ps-1(for="amount") Amount
+        input#amount.form-control.me-2(
+          type="number",
+          name="amount",
+        )
+
+        button.btn.btn-outline-primary(type="submit") Transfer 
