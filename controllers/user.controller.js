@@ -24,6 +24,8 @@ module.exports.search = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
+  // console.log(req.cookies);
+  //Để đọc được cookie thì phải cài 1 cái middleware
   res.render("users/create");
 };
 
@@ -37,6 +39,10 @@ module.exports.get = (req, res) => {
 
 module.exports.postCreate = (req, res) => {
   req.body.id = shortid.generate();
+
+  //Đây không phải cách tốt nhất nhưng mà nó nhanh
+  req.body.avatar = req.file.path.split("\\").slice(1).join("/");
+  // console.log(req.body.avatar);
   db.get("users").push(req.body).write();
   res.redirect("/users");
 };
