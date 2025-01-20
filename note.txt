@@ -17,3 +17,96 @@ Vidu: https://www.google.com.vn/search?q=hello&sca...
 Sau ? la 1 query và sau & là value
 Trả về 1 cặp key:value
 
+Tips 
+input để id và name trùng với attribute for= của label thì khi ấn vào label sẽ tự động
+mở ra cho label ấy 
+
+
+Middleware
+là 1 function nhận vào 3 tham số nhma chúng ta chỉ dùng 2 tham số 
+(req, res, next)
+Không nên bỏ req
+
+Cookies 
+Khi client gửi 1 req nào đấy lên server thì server sẽ có thể trả về hoặc ko trả về cookies
+Trả về 1 cái header: SetCookie và 1 giá trị mà mình muốn search 
+Cái browser khi nhận 1 res từ server gửi trỡ lại mà có header là set cookie thì sẽ lưu lại bên phía trình duyệt
+Sau đấy, các lần gửi tiếp theo thì nó sẽ gửi tất cả các cookie ở trên trình duyệt
+Server gửi bảo clear cookies đi thì xóa đi 
+
+Khi login thì sẽ gửi cookies còn khi logout sẽ gửi header về và xóa cookie đó đi 
+sever thường sẽ xét 1 expired vì vấn đề bảo mật (cookies tồn tại quá lâu thì sẽ bị hack)
+
+lưu pw dưới dạng text ko phải cách làm trong thực tế 
+
+tất cả những thứ bên phía browser đều có thể bị sửa đổi bởi người dùng
+không bao giờ lưu trữ mất khẩu trong db dưới dạng đọc được 
+trong TH bị hack, người dùng sẽ rơi vào TH rủi ro là khi người dùng dùng mail và pw cho những trang web khác, 
+thì hacker có thể thửu email và pw vào những trang người dùng hay dùng 
+
+Phải có signed cookie nếu không cookie sẽ dễ bị thay đổi trên browser 
+
+Environmet Variables - Biến môi trường
+sau dev env thì cho trang web chạy live --> production env 
+ở giữa thì có staging (giống git) --> mục đích: để những KH có thể check trước khi cho lên production 
+giữa các env khác nhau thì sẽ thiết lập những cái biến khác nhau 
+
+Không bao giờ commit vào git tránh những TH nhạy cảm 
+giữa những môi trường khác nhau sẽ có các cái biến khác nhau để tham chiếu đến các cái biến khác nhau 
+Biến môi trường có thế được tham chiếu bằng process.env
+
+Trên Mac và linux thêm biến môi trường bằng cách: 
+Ví dụ: 
+    SESSION_SECRET= 123uia123
+
+đối với window: 
+    D:; $env:SESSION_SECRET="123uia123"; node index.js
+
+Không bao giờ commit những secret key hay api key lên github
+
+Debugging
+
+Pagination
+Ví dụ 
+items in page n, with x items per page 
+    begin = (n-1)*x
+    end = (n-1)*x +x == n*x 
+items = array.slice(begin, end)
+
+Bài tập: làm pagination, hiển thị số sản phẩm đã thêm vào giỏ hàng, 
+        nhữn thằng nào đang sử dụng lowdb thì thay thế bằng mongodb (nên dùng async await),
+        làm nốt put patch del
+
+Check validation
+
+bodyParser ko hỗ trợ kiểu multipart/form-data
+
+Session: 1 phiên làm việc của người dùng trong trang web của mình 
+Session dùng cookies
+
+CSRF attack - Cross site request forgery
+Thường lợi dụng để tấn công vào các trang chuyển tiền, những trang có thể thay đổi thông tin
+
+Tai ngrok
+
+Collection như một array, trong mỗi collection có các object khác nhau đại diện elements cho collections ấy, mỗi object gọi
+là document
+Mongo giúp map 
+
+API: Application Programming Interface
+giuawx ứng dụng và ứng dụng 
+app này tương tác với th khác thì sẽ cho 1 vài interface
+Các endpoint ko trả về http mà trả về dữ liệu 
+Http chỉ dùng cho browser thôi
+http api trả về dưới 2 dạng json và xml
+
+REST API
+Some methods 
+GET /products: get all products []
+GET /products/:id: get one product {}
+POST /products: create product
+PUT /products/:id: Replace/ create product
+PATCH /products/:id: Update product
+DELETE /products/:id: delete product
+
+Ko dùng cookie mà hay dùng authenication header (JWT)
